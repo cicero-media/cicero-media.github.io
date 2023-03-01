@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cicero - Reset Password</title>
+    <link rel="stylesheet" href="/reset-password/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <img src="/img/logo-small.svg" />
+      </div>
+      <h1>New password</h1>
+      <form id="resetPasswordForm">
+        <div class="input-container">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+          />
+        </div>
+        <div class="input-container">
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            placeholder="Confirm password"
+          />
+        </div>
+        <div class="info" id="infoLabel" style="display: none"></div>
+        <div class="error" id="errorLabel" style="display: none"></div>
+        <button id="submitButton">
+          <div class="label" id="buttonLabel">Reset my password</div>
+          <div class="loader" id="buttonLoader" style="display: none"></div>
+        </button>
+      </form>
+    </div>
+    <script src="/js/site.js"></script>
+    <script>
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      const params = Object.fromEntries(urlSearchParams.entries());
+      const token = params.token;
+      const env = params.env;
+
+      if (!token || token.length === 0) {
+        window.location.replace("/");
+      }
+
+      const submitButton = document.getElementById("submitButton");
+      const buttonLabel = document.getElementById("buttonLabel");
+      const buttonLoader = document.getElementById("buttonLoader");
+      const infoLabel = document.getElementById("infoLabel");
+      const errorLabel = document.getElementById("errorLabel");
+
+      const resetPasswordForm = document.getElementById("resetPasswordForm");
+      resetPasswordForm.onsubmit = async function (event) {
+        event.preventDefault();
+
+        const success = false;
+
+        errorLabel.style.display = "none";
+        buttonLabel.style.display = "none";
+        buttonLoader.style.display = "block";
+
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirmPassword").value;
+        if (password !== confirmPassword) {
+          errorLabel.innerHTML = "Password and confirm password must match";
+          errorLabel.style.display = "block";
+        } else {
+          try {
+            const res = await resetPassword(token, password, env);
+            if (res.success) {
+              success = true;
+              buttonLoader.style.display = "none";
+              infoLabel.innerHTML = "Password changed successfully!";
+              infoLabel.style.display = "block";
+            } else {
+              buttonLoader.style.display = "none";
+              errorLabel.innerHTML = "Unable to reset password";
+              errorLabel.style.display = "block";
+            }
+          } catch (err) {
+            alert(err);
+          }
+        }
+
+        if (!success) {
+          buttonLoader.style.display = "none";
+          buttonLabel.style.display = "block";
+        }
+
+        return false;
+      };
+    </script>
+  </body>
+</html>

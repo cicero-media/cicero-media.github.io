@@ -1,0 +1,104 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Regular.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+body {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.logo {
+  margin: 48px auto;
+  width: 85px;
+}
+
+.logo img {
+  width: 100%;
+}
+
+h1 {
+  color: #0053d9;
+  margin-bottom: 32px;
+  font-size: 2.6rem;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0 9vw;
+}
+
+.info,
+.error {
+  font-size: 16px;
+  margin: 10px 0 20px;
+  text-align: center;
+}
+
+.error {
+  color: #ba1a1a;
+}
+
+.input-container {
+  margin-bottom: 35px;
+}
+
+input[type="password"] {
+  display: block;
+  width: 100%;
+  background: rgba(226, 226, 236, 0.5);
+  color: #45464f;
+  padding: 21px;
+  box-sizing: border-box;
+  font-size: 18px;
+  border-width: 0 0 2px 0;
+}
+
+button {
+  width: 100%;
+  font-size: 14px;
+  background: #0053d9;
+  color: #ffffff;
+  border: none;
+  border-radius: 100px;
+  box-sizing: border-box;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button .label {
+  font-size: 16px;
+}
+
+button .loader {
+  border: 3px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 3px solid #3498db;
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
