@@ -1,5 +1,5 @@
 const BASE_URLS = [
-  { env: "local", url: "http://localhost:3000" },
+  { env: "local", url: "http://localhost:3001" },
   { env: "dev", url: "https://api-dev.getcicero.io" },
   { env: "stage", url: "https://api-stage.getcicero.io" },
   { env: "prod", url: "https://api.getcicero.io" },

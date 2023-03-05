@@ -59,7 +59,7 @@
       resetPasswordForm.onsubmit = async function (event) {
         event.preventDefault();
 
-        const success = false;
+        let success = false;
 
         errorLabel.style.display = "none";
         buttonLabel.style.display = "none";
@@ -76,7 +76,7 @@
             const res = await resetPassword(token, password, env);
             if (res.success) {
               success = true;
-              buttonLoader.style.display = "none";
+              submitButton.style.display = "none";
               infoLabel.innerHTML = "Password changed successfully!";
               infoLabel.style.display = "block";
             } else {
@@ -86,6 +86,7 @@
             }
           } catch (err) {
             alert(err);
+            throw err;
           }
         }
 
